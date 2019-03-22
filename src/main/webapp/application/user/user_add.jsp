@@ -72,7 +72,15 @@
 				</select>
 				</span> </div>
         </div>
-
+        <div class="row cl">
+            <label class="form-label col-3">所在城市：</label>
+            <div class="formControls col-5" id="distpicker">
+                <span  class="select-box" style="width:95px;"><select  name="provinceName" class="select" size="1" id="province"></select></span>
+                <!-- province -->
+                <span class="select-box" style="width:95px;"><select name="cityName" class="select" size="1"  id="city"></select></span><!-- city -->
+                <span class="select-box" style="width:95px;"><select name="contryName" class="select" size="1"   id="district"></select></span>
+            </div>
+        </div>
         <div class="row cl">
             <label class="form-label col-3">个人简介：</label>
             <div class="formControls col-5">
@@ -97,6 +105,8 @@
 <script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script>
 <script type="text/javascript" src="js/H-ui.js"></script>
 <script type="text/javascript" src="js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/lib/distpicker/distpicker.data.js"></script>
+<script type="text/javascript" src="/lib/distpicker/distpicker.js"></script>
 <script type="text/javascript" src="/lib/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/zTree/v3/js/jquery.ztree.core-3.5.js"></script>
 <script type="text/javascript">
@@ -106,6 +116,12 @@
             checkboxClass: 'icheckbox-blue',
             radioClass: 'iradio-blue',
             increaseArea: '20%'
+        });
+
+        $("#distpicker").distpicker({
+            province: "--所在省--",
+            city: "--所在市--",
+            district: "--所在区--"
         });
 
         $("#form-user-add").Validform({

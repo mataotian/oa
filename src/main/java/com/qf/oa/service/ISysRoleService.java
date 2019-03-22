@@ -17,4 +17,12 @@ public interface ISysRoleService extends IBaseService<SysRole>{
     PageInfo<SysRole> selectByCondition(SysRole sysRole, Page page);
 
     List<SysRole> queryAllRole();
+
+    SysResult batchAddUser(List<Long> idList, Long roleId);
+
+    SysResult delUserFromRole(Long userId, Long roleId);
+
+    SysResult batchAddMenu(List<Long> idList, Long roleId);
+
+    SysResult delRoleMenu(Long menuId, Long roleId);
 }

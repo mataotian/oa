@@ -292,4 +292,11 @@
     SELECT u.* FROM sys_user u WHERE FLAG=1 AND USER_ID in(
     SELECT USER_ID FROM sys_role_user rs WHERE ROLE_ID=#{roleId})
   </select>
+  <select id="queryNoAuthUser" parameterType="Long" resultMap="BaseResultMap">
+    SELECT u.* FROM sys_user u WHERE FLAG=1 AND USER_ID NOT in(
+    SELECT USER_ID FROM sys_role_user rs WHERE ROLE_ID=#{roleId})
+    <if test="userName != null and userName != ''">
+      AND USER_NAME LIKE concat('%',#{userName},'%')
+    </if>
+  </select>
 </mapper>

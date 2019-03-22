@@ -113,4 +113,22 @@
     </where>
 
   </select>
+  <insert id="batchAddUser">
+    INSERT INTO sys_role_user(user_id,role_id) VALUES
+    <foreach collection="idList" item="userId" separator=",">
+      (#{userId},#{roleId})
+    </foreach>
+  </insert>
+  <delete id="delUserFromRole">
+    delete FROM sys_role_user WHERE USER_ID=#{userId} AND ROLE_ID=#{roleId}
+  </delete>
+  <insert id="batchAddMenu">
+    INSERT INTO sys_role_menu(menu_id,role_id) VALUES
+    <foreach collection="idList" item="menuId" separator=",">
+      (#{menuId},#{roleId})
+    </foreach>
+  </insert>
+  <delete id="delRoleMenu">
+    DELETE FROM sys_role_menu WHERE MENU_ID=#{menuId} AND ROLE_ID=#{roleId}
+  </delete>
 </mapper>

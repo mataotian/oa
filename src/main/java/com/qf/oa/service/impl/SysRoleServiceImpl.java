@@ -65,4 +65,52 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRole> implements ISys
         List<SysRole> roleList=roleMapper.getList();
         return roleList;
     }
+
+    @Override
+    public SysResult batchAddUser(List<Long> idList, Long roleId) {
+        SysResult sysResult=new SysResult();
+        int count=roleMapper.batchAddUser(idList,roleId);
+        if(count>0){
+            sysResult.setResult(true);
+        }else{
+            sysResult.setResult(false);
+        }
+        return sysResult;
+    }
+
+    @Override
+    public SysResult delUserFromRole(Long userId, Long roleId) {
+        SysResult sysResult=new SysResult();
+        int count=roleMapper.delUserFromRole(userId,roleId);
+        if(count>0){
+            sysResult.setResult(true);
+        }else{
+            sysResult.setResult(false);
+        }
+        return sysResult;
+    }
+
+    @Override
+    public SysResult batchAddMenu(List<Long> idList, Long roleId) {
+        SysResult sysResult=new SysResult();
+        int count=roleMapper.batchAddMenu(idList,roleId);
+        if(count>0){
+            sysResult.setResult(true);
+        }else{
+            sysResult.setResult(false);
+        }
+        return sysResult;
+    }
+
+    @Override
+    public SysResult delRoleMenu(Long menuId, Long roleId) {
+        SysResult sysResult=new SysResult();
+        int count=roleMapper.delRoleMenu(menuId,roleId);
+        if(count>0){
+            sysResult.setResult(true);
+        }else{
+            sysResult.setResult(false);
+        }
+        return sysResult;
+    }
 }

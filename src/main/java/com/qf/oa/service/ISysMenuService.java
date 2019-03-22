@@ -17,4 +17,6 @@ public interface ISysMenuService extends IBaseService<SysMenu>{
     SysResult updateBatchDel(List<Long> idList);
 
     PageInfo<SysMenu> queryAuthMenu(Long roleId, Page page);
+
+    PageInfo<SysMenu> queryNoAuthMenu(String menuName, Long roleId, Page page);
 }

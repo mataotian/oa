@@ -39,17 +39,18 @@
     <table class="table table-border table-bordered table-hover table-bg">
         <thead>
         <tr>
-            <th scope="col" colspan="7">用户管理</th>
+            <th scope="col" colspan="10">用户管理</th>
         </tr>
         <tr class="text-c">
             <th width="25"><input type="checkbox"  value="" name=""></th>
             <th width="40">用户ID</th>
-            <th width="200">用户名</th>
+            <th width="60">用户名</th>
             <th width="40">联系电话</th>
             <th width="40">邮箱</th>
-            <th width="200">生日</th>
+            <th width="80">生日</th>
             <th width="80">是否有效</th>
-            <th width="300">个人简介</th>
+            <th width="150">出生地</th>
+            <th width="250">个人简介</th>
             <th width="70">操作</th>
         </tr>
         </thead>
@@ -71,6 +72,7 @@
                     否
                 </c:if>
             </td>
+            <td>${sysUser.provinceName}/${sysUser.cityName}/${sysUser.contryName}</td>
             <td>${sysUser.introduce}</td>
             <td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_user_edit('用户编辑','sysUser/toUpdate/${sysUser.userId}','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="user_del(this,${sysUser.userId})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
         </tr>

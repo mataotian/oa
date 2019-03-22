@@ -47,8 +47,8 @@
             </div>
         </div>
     </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe6e2;</i> 授权新角色</a>
-        <a href="javascript:;" onclick="admin_add('添加管理员','admin-add.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 授权新菜单</a></span>
+    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="user_add('授权新用户','authorization/queryNoAuthUser','1000','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe6e2;</i> 授权新角色</a>
+        <a href="javascript:;" onclick="menu_add('授权新菜单','authorization/queryNoAuthMenu','1000','600')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 授权新菜单</a></span>
     </div>
     <table class="table table-border table-bordered table-bg" id="authorization">
 
@@ -82,23 +82,40 @@
         })
     })
     /*管理员-增加*/
-    function admin_add(title,url,w,h){
-        layer_show(title,url,w,h);
+    function user_add(title,url,w,h){
+        var role=$("#role").val();
+        var type=$("#type").val();
+        if(role==-1){
+            layer.msg("请选择角色",{icon: 2, time: 2000});
+            return;
+        }else if(type==-1){
+            layer.msg("请选择类型",{icon: 2, time: 2000});
+            return;
+        }
+        if(type==2){
+            layer.msg("类型选择错误,请选择用户类型",{icon: 2, time: 2000});
+        }else{
+            url=url+"?roleId="+role;
+            layer_show(title,url,w,h);
+        }
     }
-    /*管理员-删除*/
-    function admin_del(obj,id){
-        layer.confirm('确认要删除吗？',function(index){
-            //此处请求后台程序，下方是成功后的前台处理……
-
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!',{icon:1,time:1000});
-        });
+    function menu_add(title,url,w,h){
+        var role=$("#role").val();
+        var type=$("#type").val();
+        if(role==-1){
+            layer.msg("请选择角色",{icon: 2, time: 2000});
+            return;
+        }else if(type==-1){
+            layer.msg("请选择类型",{icon: 2, time: 2000});
+            return;
+        }
+        if(type==1){
+            layer.msg("类型选择错误,请选择菜单类型",{icon: 2, time: 2000});
+        }else{
+            url=url+"?roleId="+role;
+            layer_show(title,url,w,h);
+        }
     }
-    /*管理员-编辑*/
-    function admin_edit(title,url,id,w,h){
-        layer_show(title,url,w,h);
-    }
-
 </script>
 </body>
 </html>

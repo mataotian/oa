@@ -73,4 +73,13 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenu> implements ISys
         PageInfo<SysMenu> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
+
+    @Override
+    public PageInfo<SysMenu> queryNoAuthMenu(String menuName, Long roleId, Page page) {
+        PageHelper.startPage(page.getCurrentPage(),page.getPageSize());
+        List<SysMenu> list=mapper.queryNoAuthMenu(menuName,roleId);
+        PageInfo<SysMenu> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
 }

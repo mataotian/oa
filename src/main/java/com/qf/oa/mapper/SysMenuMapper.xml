@@ -171,4 +171,11 @@
     SELECT m.* FROM sys_menu m WHERE IS_PUBLISH=1 AND MENU_ID in(
     SELECT MENU_ID FROM sys_role_menu rs WHERE ROLE_ID=#{roleId})
   </select>
+  <select id="queryNoAuthMenu" parameterType="Long" resultMap="BaseResultMap">
+    SELECT m.* FROM sys_menu m WHERE IS_PUBLISH=1 AND MENU_ID NOT in(
+    SELECT MENU_ID FROM sys_role_menu rs WHERE ROLE_ID=#{roleId})
+    <if test="menuName != null and menuName != ''">
+      AND MENU_NAME LIKE concat('%',#{menuName},'%')
+    </if>
+  </select>
 </mapper>

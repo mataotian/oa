@@ -15,4 +15,5 @@ public interface ISysUserService extends IBaseService<SysUser> {
 
     PageInfo<SysUser> queryAuthUser(Long roleId, Page page);
 
+    PageInfo<SysUser> queryNoAuthUser(String userName,Long roleId,Page page);
 }

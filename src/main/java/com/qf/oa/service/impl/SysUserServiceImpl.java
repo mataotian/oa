@@ -51,4 +51,12 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser> implements ISys
         PageInfo<SysUser> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
+
+    @Override
+    public PageInfo<SysUser> queryNoAuthUser(String userName,Long roleId,Page page) {
+        PageHelper.startPage(page.getCurrentPage(),page.getPageSize());
+        List<SysUser> list=mapper.queryNoAuthUser(roleId,userName);
+        PageInfo<SysUser> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
 }
