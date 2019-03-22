@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.oa.mapper.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.qf.oa.entity.SysRole">
+    <id column="ROLE_ID" jdbcType="BIGINT" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_DESC" jdbcType="VARCHAR" property="roleDesc" />
+    <result column="FLAG" jdbcType="BIT" property="flag" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLE_ID, ROLE_NAME, ROLE_DESC, FLAG, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where ROLE_ID = #{roleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_role
+    where ROLE_ID = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.oa.entity.SysRole">
+    insert into sys_role (ROLE_ID, ROLE_NAME, ROLE_DESC, 
+      FLAG, CREATE_TIME)
+    values (#{roleId,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=BIT}, now()
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.oa.entity.SysRole">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME,
+      </if>
+      <if test="roleDesc != null">
+        ROLE_DESC,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+        CREATE_TIME,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=BIT},
+      </if>
+        now(),
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.oa.entity.SysRole">
+    update sys_role
+    <set>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDesc != null">
+        ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ROLE_ID = #{roleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.oa.entity.SysRole">
+    update sys_role
+    set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      ROLE_DESC = #{roleDesc,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=BIT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ROLE_ID = #{roleId,jdbcType=BIGINT}
+  </update>
+  <select id="getList"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role WHERE flag=1
+  </select>
+  <update id="updateBatchDelByIdList" parameterType="Long">
+    UPDATE sys_role SET
+    FLAG =0
+    WHERE ROLE_ID IN
+    <foreach collection="list" item="roleId" open="(" close=")" separator=",">
+      #{roleId}
+    </foreach>
+  </update>
+  <select id="selectByCondition" parameterType="com.qf.oa.entity.SysRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    <where>
+      <if test="roleName != null">
+        AND ROLE_NAME LIKE concat('%',#{roleName},'%')
+      </if>
+      <if test="flag != null">
+        AND FLAG = #{flag,jdbcType=BIT}
+      </if>
+    </where>
+
+  </select>
+</mapper>

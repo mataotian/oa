@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.oa.mapper.SysAreaMapper">
+  <resultMap id="BaseResultMap" type="com.qf.oa.entity.SysArea">
+    <id column="AREA_ID" jdbcType="BIGINT" property="areaId" />
+    <result column="AREA_PARENT_ID" jdbcType="BIGINT" property="areaParentId" />
+    <result column="AREA_TYPE" jdbcType="VARCHAR" property="areaType" />
+    <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName" />
+    <result column="AREA_SHORT_NAME" jdbcType="VARCHAR" property="areaShortName" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    AREA_ID, AREA_PARENT_ID, AREA_TYPE, AREA_NAME, AREA_SHORT_NAME, LONGITUDE, LATITUDE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_area
+    where AREA_ID = #{areaId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_area
+    where AREA_ID = #{areaId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.oa.entity.SysArea">
+    insert into sys_area (AREA_ID, AREA_PARENT_ID, AREA_TYPE, 
+      AREA_NAME, AREA_SHORT_NAME, LONGITUDE, 
+      LATITUDE)
+    values (#{areaId,jdbcType=BIGINT}, #{areaParentId,jdbcType=BIGINT}, #{areaType,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{areaShortName,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.oa.entity.SysArea">
+    insert into sys_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="areaId != null">
+        AREA_ID,
+      </if>
+      <if test="areaParentId != null">
+        AREA_PARENT_ID,
+      </if>
+      <if test="areaType != null">
+        AREA_TYPE,
+      </if>
+      <if test="areaName != null">
+        AREA_NAME,
+      </if>
+      <if test="areaShortName != null">
+        AREA_SHORT_NAME,
+      </if>
+      <if test="longitude != null">
+        LONGITUDE,
+      </if>
+      <if test="latitude != null">
+        LATITUDE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="areaId != null">
+        #{areaId,jdbcType=BIGINT},
+      </if>
+      <if test="areaParentId != null">
+        #{areaParentId,jdbcType=BIGINT},
+      </if>
+      <if test="areaType != null">
+        #{areaType,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaShortName != null">
+        #{areaShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.oa.entity.SysArea">
+    update sys_area
+    <set>
+      <if test="areaParentId != null">
+        AREA_PARENT_ID = #{areaParentId,jdbcType=BIGINT},
+      </if>
+      <if test="areaType != null">
+        AREA_TYPE = #{areaType,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaShortName != null">
+        AREA_SHORT_NAME = #{areaShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        LATITUDE = #{latitude,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AREA_ID = #{areaId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.oa.entity.SysArea">
+    update sys_area
+    set AREA_PARENT_ID = #{areaParentId,jdbcType=BIGINT},
+      AREA_TYPE = #{areaType,jdbcType=VARCHAR},
+      AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      AREA_SHORT_NAME = #{areaShortName,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR}
+    where AREA_ID = #{areaId,jdbcType=BIGINT}
+  </update>
+</mapper>

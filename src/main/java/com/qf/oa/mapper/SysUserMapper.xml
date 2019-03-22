@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.oa.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.qf.oa.entity.SysUser">
+    <id column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="ORG_ID" jdbcType="BIGINT" property="orgId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_PASSWORD" jdbcType="CHAR" property="userPassword" />
+    <result column="PHONE" jdbcType="CHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="BIRTHDAY" jdbcType="DATE" property="birthday" />
+    <result column="SEX" jdbcType="BIT" property="sex" />
+    <result column="IMAGE_URL" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="HOBBY" jdbcType="VARCHAR" property="hobby" />
+    <result column="PROVINCE_ID" jdbcType="INTEGER" property="provinceId" />
+    <result column="PROVINCE_NAME" jdbcType="VARCHAR" property="provinceName" />
+    <result column="CITY_ID" jdbcType="INTEGER" property="cityId" />
+    <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
+    <result column="COUNTRY_ID" jdbcType="INTEGER" property="countryId" />
+    <result column="CONTRY_NAME" jdbcType="VARCHAR" property="contryName" />
+    <result column="INTRODUCE" jdbcType="VARCHAR" property="introduce" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="FLAG" jdbcType="BIT" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, ORG_ID, USER_NAME, USER_PASSWORD, PHONE, EMAIL, BIRTHDAY, SEX, IMAGE_URL, 
+    HOBBY, PROVINCE_ID, PROVINCE_NAME, CITY_ID, CITY_NAME, COUNTRY_ID, CONTRY_NAME, INTRODUCE, 
+    CREATE_TIME, UPDATE_TIME, FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_user
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.oa.entity.SysUser">
+    insert into sys_user (USER_ID, ORG_ID, USER_NAME, 
+      USER_PASSWORD, PHONE, EMAIL, 
+      BIRTHDAY, SEX, IMAGE_URL, HOBBY, 
+      PROVINCE_ID, PROVINCE_NAME, CITY_ID, 
+      CITY_NAME, COUNTRY_ID, CONTRY_NAME, 
+      INTRODUCE, CREATE_TIME, UPDATE_TIME, 
+      FLAG)
+    values (#{userId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
+      #{userPassword,jdbcType=CHAR}, #{phone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{sex,jdbcType=BIT}, #{imageUrl,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=INTEGER}, #{provinceName,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
+      #{cityName,jdbcType=VARCHAR}, #{countryId,jdbcType=INTEGER}, #{contryName,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{flag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.oa.entity.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="orgId != null">
+        ORG_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userPassword != null">
+        USER_PASSWORD,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL,
+      </if>
+      <if test="hobby != null">
+        HOBBY,
+      </if>
+      <if test="provinceId != null">
+        PROVINCE_ID,
+      </if>
+      <if test="provinceName != null">
+        PROVINCE_NAME,
+      </if>
+      <if test="cityId != null">
+        CITY_ID,
+      </if>
+      <if test="cityName != null">
+        CITY_NAME,
+      </if>
+      <if test="countryId != null">
+        COUNTRY_ID,
+      </if>
+      <if test="contryName != null">
+        CONTRY_NAME,
+      </if>
+      <if test="introduce != null">
+        INTRODUCE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null">
+        #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null">
+        #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="contryName != null">
+        #{contryName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.oa.entity.SysUser">
+    update sys_user
+    <set>
+      <if test="orgId != null">
+        ORG_ID = #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        USER_PASSWORD = #{userPassword,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=BIT},
+      </if>
+      <if test="imageUrl != null">
+        IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        HOBBY = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        PROVINCE_ID = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceName != null">
+        PROVINCE_NAME = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        CITY_ID = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="cityName != null">
+        CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null">
+        COUNTRY_ID = #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="contryName != null">
+        CONTRY_NAME = #{contryName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=BIT},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.oa.entity.SysUser">
+    update sys_user
+    set ORG_ID = #{orgId,jdbcType=BIGINT},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=CHAR},
+      PHONE = #{phone,jdbcType=CHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=DATE},
+      SEX = #{sex,jdbcType=BIT},
+      IMAGE_URL = #{imageUrl,jdbcType=VARCHAR},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      PROVINCE_ID = #{provinceId,jdbcType=INTEGER},
+      PROVINCE_NAME = #{provinceName,jdbcType=VARCHAR},
+      CITY_ID = #{cityId,jdbcType=INTEGER},
+      CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      COUNTRY_ID = #{countryId,jdbcType=INTEGER},
+      CONTRY_NAME = #{contryName,jdbcType=VARCHAR},
+      INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=BIT}
+    where USER_ID = #{userId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCondition" parameterType="sysUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    <where>
+      <if test="userName != null and userName!=''">
+        AND USER_NAME LIKE concat('%',#{userName},'%')
+      </if>
+      <if test="flag != null">
+        AND FLAG = #{flag,jdbcType=BIT}
+      </if>
+    </where>
+  </select>
+  <update id="updateBatchDelIdList" parameterType="Long">
+    UPDATE sys_user
+    SET FLAG=0
+    WHERE USER_ID IN
+    <foreach collection="list" item="userId" open="(" close=")" separator=",">
+      #{userId}
+    </foreach>
+  </update>
+  <select id="queryAuthUser" parameterType="Long" resultMap="BaseResultMap">
+    SELECT u.* FROM sys_user u WHERE FLAG=1 AND USER_ID in(
+    SELECT USER_ID FROM sys_role_user rs WHERE ROLE_ID=#{roleId})
+  </select>
+</mapper>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.oa.mapper.SysOrgMapper">
+  <resultMap id="BaseResultMap" type="com.qf.oa.entity.SysOrg">
+    <id column="ORG_ID" jdbcType="BIGINT" property="orgId" />
+    <result column="ORG_PARENT_ID" jdbcType="BIGINT" property="orgParentId" />
+    <result column="ORG_PARENT_NAME" jdbcType="VARCHAR" property="orgParentName" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="ORG_DESC" jdbcType="VARCHAR" property="orgDesc" />
+    <result column="FLAG" jdbcType="BIT" property="flag" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORG_ID, ORG_PARENT_ID, ORG_PARENT_NAME, ORG_NAME, ORG_DESC, FLAG, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_org
+    where ORG_ID = #{orgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_org
+    where ORG_ID = #{orgId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.qf.oa.entity.SysOrg">
+    insert into sys_org (ORG_ID, ORG_PARENT_ID, ORG_PARENT_NAME, 
+      ORG_NAME, ORG_DESC, FLAG, 
+      CREATE_TIME, UPDATE_TIME)
+    values (#{orgId,jdbcType=BIGINT}, #{orgParentId,jdbcType=BIGINT}, #{orgParentName,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgDesc,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.oa.entity.SysOrg">
+    insert into sys_org
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        ORG_ID,
+      </if>
+      <if test="orgParentId != null">
+        ORG_PARENT_ID,
+      </if>
+      <if test="orgParentName != null">
+        ORG_PARENT_NAME,
+      </if>
+      <if test="orgName != null">
+        ORG_NAME,
+      </if>
+      <if test="orgDesc != null">
+        ORG_DESC,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+        CREATE_TIME,
+        UPDATE_TIME,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgParentId != null">
+        #{orgParentId,jdbcType=BIGINT},
+      </if>
+      <if test="orgParentName != null">
+        #{orgParentName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDesc != null">
+        #{orgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=BIT},
+      </if>
+      now(),now()
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.oa.entity.SysOrg">
+    update sys_org
+    <set>
+      <if test="orgParentId != null">
+        ORG_PARENT_ID = #{orgParentId,jdbcType=BIGINT},
+      </if>
+      <if test="orgParentName != null">
+        ORG_PARENT_NAME = #{orgParentName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null">
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDesc != null">
+        ORG_DESC = #{orgDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=BIT},
+      </if>
+        UPDATE_TIME = now(),
+    </set>
+    where ORG_ID = #{orgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.oa.entity.SysOrg">
+    update sys_org
+    set ORG_PARENT_ID = #{orgParentId,jdbcType=BIGINT},
+      ORG_PARENT_NAME = #{orgParentName,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_DESC = #{orgDesc,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=BIT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ORG_ID = #{orgId,jdbcType=BIGINT}
+  </update>
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_org WHERE FLAG=1
+  </select>
+  <select id="queryParentById" parameterType="Long" resultType="int">
+    select count(*) from sys_org where ORG_PARENT_ID=#{orgId}
+  </select>
+  <select id="queryParentByIdList" parameterType="Long" resultType="int">
+    select count(*) from sys_org where ORG_PARENT_ID IN
+    <foreach collection="list" item="orgId" open="(" close=")" separator=",">
+      #{orgId}
+    </foreach>
+  </select>
+  <update id="updateBatchDelByIdList" parameterType="Long">
+    UPDATE sys_org SET
+    FLAG =0
+    WHERE ORG_ID IN
+    <foreach collection="list" item="orgId" open="(" close=")" separator=",">
+      #{orgId}
+    </foreach>
+  </update>
+  <select id="selectByCondition" parameterType="com.qf.oa.entity.SysOrg" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_org
+    <where>
+      <if test="orgParentName != null and orgParentName !=''">
+       AND ORG_PARENT_NAME LIKE concat('%',#{orgParentName},'%')
+      </if>
+      <if test="orgName != null">
+       AND ORG_NAME LIKE concat('%',#{orgName},'%')
+      </if>
+      <if test="flag != null">
+       AND FLAG = #{flag,jdbcType=BIT}
+      </if>
+    </where>
+
+  </select>
+</mapper>
