@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <base href="<%=request.getContextPath()+"/"%>">
-<link href="css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="skin/default/skin.css" rel="stylesheet" type="text/css" />
-<link href="lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="../css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="../css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+<link href="../skin/default/skin.css" rel="stylesheet" type="text/css" />
+<link href="../lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
 <body>
 <header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
     <nav class="mainnav cl" id="Hui-nav">
@@ -27,7 +27,7 @@
             <ul class="dropDown-menu radius box-shadow">
                 <li><a href="#">个人信息</a></li>
                 <li><a href="#">切换账户</a></li>
-                <li><a href="#">退出</a></li>
+                <li><a href="sysUser/logout">退出</a></li>
             </ul>
         </li>
         <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
@@ -48,24 +48,22 @@
     <div class="menu_dropdown bk_2">
 
         <dl id="menu-admin">
-            <dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd>
+            <c:forEach items="${menuList}" var="menu1">
+                <c:if test="${menu1.menuType==1}">
+                    <dt><i class="Hui-iconfont">&#xe62d;</i>${menu1.menuName}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                </c:if>
+                <dd>
                 <ul>
-                    <li><a _href="sysOrg/selectByCondition" href="javascript:void(0)">组织管理</a></li>
-                    <li><a _href="sysUser/selectByCondition" href="javascript:void(0)">用户管理</a></li>
+                    <c:forEach items="${menuList}" var="menu2">
+                        <c:if test="${menu2.menuType==2 && menu2.menuParentId==menu1.menuId}">
+                            <li><a _href="${menu2.menuPath}" href="javascript:void(0)">${menu2.menuName}</a></li>
+                        </c:if>
+                    </c:forEach>
                 </ul>
-            </dd>
+                </dd>
+            </c:forEach>
         </dl>
-        <dl id="menu-product">
-            <dt><i class="Hui-iconfont">&#xe620;</i> 授权管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-            <dd>
-                <ul>
-                    <li><a _href="sysMenu/selectByCondition" href="javascript:void(0)">菜单管理</a></li>
-                    <li><a _href="sysRole/selectByCondition" href="javascript:void(0)">角色管理</a></li>
-                    <li><a _href="authorization/authPage" href="javascript:void(0)">授权管理</a></li>
-                </ul>
-            </dd>
-        </dl>
+
 
     </div>
 </aside>
@@ -86,10 +84,10 @@
         </div>
     </div>
 </section>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="lib/layer/layer.js"></script>
-<script type="text/javascript" src="js/H-ui.js"></script>
-<script type="text/javascript" src="js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/layer.js"></script>
+<script type="text/javascript" src="../js/H-ui.js"></script>
+<script type="text/javascript" src="../js/H-ui.admin.js"></script>
 <script type="text/javascript">
     /*资讯-添加*/
     function article_add(title,url){

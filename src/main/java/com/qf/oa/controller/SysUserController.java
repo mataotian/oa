@@ -4,8 +4,13 @@ import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import com.qf.oa.common.Page;
 import com.qf.oa.common.SysResult;
+import com.qf.oa.entity.SysMenu;
 import com.qf.oa.entity.SysUser;
 import com.qf.oa.service.ISysUserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +27,39 @@ import java.util.Map;
 public class SysUserController {
     @Autowired
     private ISysUserService sysUserService;
+
+    @RequestMapping("/login")
+    public String losgin(){
+        return "login";
+    }
+    @RequestMapping("/checkLogin")
+    public String checkLogin(SysUser sysUser,Model model){
+        Subject currentUser = SecurityUtils.getSubject();
+        if(!currentUser.isAuthenticated()){
+            UsernamePasswordToken token=new UsernamePasswordToken(sysUser.getUserName(),sysUser.getUserPassword());
+            try{
+                currentUser.login(token);
+            }catch (AuthenticationException e){
+                System.out.println("认证失败");
+                return "login";
+            }
+
+        }
+        SysUser user= (SysUser) currentUser.getPrincipal();
+        List<SysMenu> menuList=sysUserService.getMenuListByUserId(user.getUserId());
+        model.addAttribute("menuList",menuList);
+        return "index";
+    }
+//    @RequestMapping("/checkLogin")
+//    public String checkLogin(SysUser sysUser,Model model){
+//        SysUser currentUser=sysUserService.getUserById(sysUser);
+//        if(currentUser==null){
+//            return "login";
+//        }
+//        List<SysMenu> menuList=sysUserService.getMenuListByUserId(currentUser.getUserId());
+//        model.addAttribute("menuList",menuList);
+//        return "index";
+//    }
     @RequestMapping("/selectByCondition")
     public String selectByCondition(Page page, SysUser sysUser, Model model){
         PageInfo<SysUser> pageInfo=sysUserService.selectByCondition(sysUser,page);

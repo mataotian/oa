@@ -139,8 +139,9 @@
                     url: "sysUser/batchDel?idList="+ids,
                     success: function (data) {
                         if(data.result){
-                            layer.msg('已删除!', {icon: 1, time: 1000});
-                            location.reload();
+                            layer.msg('已删除!', {icon: 1, time: 1000},function () {
+                                location.reload();
+                            });
                         }else{
                             layer.msg('删除失败!', {icon: 1, time: 1000});
                         }

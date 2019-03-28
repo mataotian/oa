@@ -78,6 +78,7 @@
                 url: "authorization/delRoleMenu?menuId="+id+"&roleId="+roleId1,
                 success: function (data) {
                     if(data.result){
+                        $(obj).parents("tr").remove();
                         layer.msg('已解除授权!', {icon: 1, time: 1000});
                     }else{
                         layer.msg('解除授权失败!', {icon: 2, time: 1000});

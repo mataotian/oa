@@ -299,4 +299,24 @@
       AND USER_NAME LIKE concat('%',#{userName},'%')
     </if>
   </select>
+  <select id="getUserById" parameterType="sysUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user WHERE USER_NAME=#{userName}
+  </select>
+  <select id="getMenuListByUserId" parameterType="Long" resultMap="com.qf.oa.mapper.SysMenuMapper.BaseResultMap">
+      SELECT DISTINCT m.* FROM
+      sys_role_user rs,
+      sys_role_menu rm,
+      sys_menu m
+      WHERE rs.USER_ID=#{userId}
+      AND rs.ROLE_ID=rm.ROLE_ID
+      AND rm.MENU_ID=m.MENU_ID
+      AND m.MENU_PARENT_ID!=-1
+  </select>
+  <select id="getUserByUserName" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user WHERE USER_NAME=#{userName}
+  </select>
 </mapper>

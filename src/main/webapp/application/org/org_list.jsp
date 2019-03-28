@@ -81,7 +81,10 @@
                 </c:if>
             </td>
             <td>${sysOrg.orgDesc}</td>
-            <td class="f-14"><a title="编辑" href="javascript:;" onclick="admin_org_edit('组织编辑','sysOrg/toUpdate/${sysOrg.orgId}','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="org_del(this,${sysOrg.orgId})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+            <td class="f-14">
+                <a title="编辑" href="javascript:;" onclick="admin_org_edit('组织编辑','sysOrg/toUpdate/${sysOrg.orgId}','1')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                <a title="删除" href="javascript:;" onclick="org_del(this,${sysOrg.orgId})" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+            </td>
         </tr>
         </c:forEach>
 
@@ -119,8 +122,9 @@
                 success: function (data) {
                     if(data.result){
                         $(obj).parents("tr").remove();
-                        layer.msg('已删除!', {icon: 1, time: 1000});
-                        location.reload();
+                        layer.msg('已删除!', {icon: 1, time: 1000},function () {
+                            location.reload();
+                        });
                     }else{
                         layer.msg('删除失败!', {icon: 1, time: 1000});
                     }
@@ -145,8 +149,9 @@
                     url: "sysOrg/batchDel?idList="+ids,
                     success: function (data) {
                         if(data.result){
-                            layer.msg('已删除!', {icon: 1, time: 1000});
-                            location.reload();
+                            layer.msg('已删除!', {icon: 1, time: 1000},function () {
+                                location.reload();
+                            });
                         }else{
                             layer.msg('删除失败!', {icon: 1, time: 1000});
                         }

@@ -89,6 +89,7 @@
                 data: "userId=" + id+"&roleId="+roleId1,
                 success: function(data){
                     if (data.result) {
+                        $(obj).parents("tr").remove();
                         layer.msg('解决授权成功!', {icon: 1, time: 2000});
                     } else {
                         layer.msg('解决授权失败!', {icon: 2, time: 2000});

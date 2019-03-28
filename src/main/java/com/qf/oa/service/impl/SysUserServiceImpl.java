@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.oa.common.Page;
 import com.qf.oa.dao.IBaseDao;
+import com.qf.oa.entity.SysMenu;
 import com.qf.oa.entity.SysUser;
 import com.qf.oa.mapper.SysUserMapper;
 import com.qf.oa.service.ISysUserService;
@@ -58,5 +59,25 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser> implements ISys
         List<SysUser> list=mapper.queryNoAuthUser(roleId,userName);
         PageInfo<SysUser> pageInfo=new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Override
+    public SysUser getUserById(SysUser sysUser) {
+        SysUser currentUser=mapper.getUserById(sysUser);
+        if(sysUser.getUserPassword().equals(currentUser.getUserPassword())){
+            return currentUser;
+        }
+        return null;
+    }
+
+    @Override
+    public List<SysMenu> getMenuListByUserId(Long userId) {
+        List<SysMenu> menuList=mapper.getMenuListByUserId(userId);
+        return menuList;
+    }
+
+    @Override
+    public SysUser getUserByUserName(String username) {
+        return mapper.getUserByUserName(username);
     }
 }

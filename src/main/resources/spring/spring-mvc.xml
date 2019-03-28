@@ -31,7 +31,13 @@
         <!-- 渲染后视图的后缀 -->
         <property name="suffix" value=".jsp" />
     </bean>
-
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置编码格式 -->
+        <property name="defaultEncoding" value="utf-8"></property>
+        <!-- 设置上传文件总大小，单位字节 -->
+        <property name="maxUploadSize" value="20971520"></property>
+    </bean>
     <!-- 配置静态资源-->
 
     <!--<mvc:resources location="/js/" mapping="/js/**"></mvc:resources>-->

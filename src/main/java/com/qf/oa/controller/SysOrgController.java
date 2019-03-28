@@ -71,6 +71,7 @@ public class SysOrgController {
         model.addAttribute("sysOrg",sysOrg);
         return "org/org_update";
     }
+
     @RequestMapping("/update")
     @ResponseBody
     public SysResult update(SysOrg sysOrg){

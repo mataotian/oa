@@ -98,8 +98,12 @@
                     url: "authorization/batchAddUser?idList="+ids+"&roleId="+${roleId},
                     success: function (data) {
                         if(data.result){
-                            layer.msg('已授权!', {icon: 1, time: 1000});
-                            location.reload();
+                            layer.msg('已授权!', {icon: 1, time: 1000},function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.$('.btn-refresh').click();
+                                parent.layer.close(index);
+                                location.reload();
+                            });
                         }else{
                             layer.msg('授权失败!', {icon: 1, time: 1000});
                         }

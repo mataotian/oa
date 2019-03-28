@@ -96,14 +96,13 @@
                             icon=5;
                         }
                         layer.alert(data.data ,{icon:icon},function () {
-
+                            var index = parent.layer.getFrameIndex(window.name);
+                            parent.$('.btn-refresh').click();
+                            parent.layer.close(index);
+                            parent.location.reload();
                         });
                     }
                 })
-                var index = parent.layer.getFrameIndex(window.name);
-                parent.$('.btn-refresh').click();
-                parent.layer.close(index);
-                parent.location.reload();
                return false;
             }
         })

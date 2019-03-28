@@ -1,6 +1,7 @@
 package com.qf.oa.mapper;
 
 import com.qf.oa.dao.IBaseDao;
+import com.qf.oa.entity.SysMenu;
 import com.qf.oa.entity.SysUser;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +16,10 @@ public interface SysUserMapper extends IBaseDao<SysUser>{
     List<SysUser> queryAuthUser(Long roleId);
 
     List<SysUser> queryNoAuthUser(@Param("roleId") Long roleId,@Param("userName") String userName);
+
+    SysUser getUserById(SysUser sysUser);
+
+    List<SysMenu> getMenuListByUserId(Long userId);
+
+    SysUser getUserByUserName(String username);
 }
