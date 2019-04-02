@@ -25,9 +25,6 @@ public class SysOrgController {
     private ISysOrgService sysOrgService;
     @RequestMapping("/page")
     public String getPage(Page page, Model model){
-       // int pageSize=3;
-       // page.setCurrentPage(currentPage);
-       //  page.setPageSize(pageSize);
         PageInfo<SysOrg> pageInfo=sysOrgService.getList(page);
 
         model.addAttribute("pageInfo",pageInfo);

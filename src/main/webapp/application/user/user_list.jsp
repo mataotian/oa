@@ -44,7 +44,7 @@
         <tr class="text-c">
             <th width="25"><input type="checkbox"  value="" name=""></th>
             <th width="40">用户ID</th>
-            <th width="60">用户名</th>
+            <th width="80">用户名</th>
             <th width="40">联系电话</th>
             <th width="40">邮箱</th>
             <th width="80">生日</th>

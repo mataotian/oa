@@ -50,7 +50,7 @@
     <table class="table table-border table-bordered table-hover table-bg">
         <thead>
         <tr>
-            <th scope="col" colspan="7">组织管理</th>
+            <th scope="col" colspan="8">组织管理</th>
         </tr>
         <tr class="text-c">
             <th width="25"><input type="checkbox"  value="" name=""></th>
